@@ -1,0 +1,10 @@
+
+version: '3'
+
+services:
+  gradle_starter:
+    build:
+      context: .
+    ports:
+      - 9999:9090
+

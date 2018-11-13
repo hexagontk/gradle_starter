@@ -1,0 +1,8 @@
+
+FROM openjdk:11
+ENV PROJECT gradle_starter
+
+COPY build/install/$PROJECT /opt/$PROJECT
+WORKDIR /opt/$PROJECT
+EXPOSE 9090
+ENTRYPOINT /opt/$PROJECT/bin/$PROJECT

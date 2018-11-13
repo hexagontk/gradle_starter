@@ -1,0 +1,18 @@
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.3.0'
+}
+
+apply from: "$gradleScripts/kotlin.gradle"
+apply from: "$gradleScripts/service.gradle"
+
+mainClassName = 'org.example.GradleStarterKt'
+
+dependencies {
+    compile("com.hexagonkt:server_jetty:$hexagonVersion")
+
+    // To use Logback inside the application (not only in tests) change this dependency to 'compile'
+    testCompile("ch.qos.logback:logback-classic:$logbackVersion") { exclude module: 'slf4j-api' }
+    testCompile("junit:junit:$junitVersion")
+    testCompile("com.hexagonkt:port_client:$hexagonVersion")
+}

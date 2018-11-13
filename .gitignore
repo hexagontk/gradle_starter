@@ -1,0 +1,27 @@
+
+# Gradle
+.gradle/
+build/
+local.*
+
+# Eclipse
+.settings/
+.project
+.classpath
+
+# Idea
+.idea/
+out/
+*.iml
+
+# VS Code
+.vscode/
+
+# Other Tools
+.lazybones/
+.java-version
+
+# Runtime
+log/
+*.log
+*.hprof
