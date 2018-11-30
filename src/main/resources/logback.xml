@@ -1,5 +1,5 @@
 <!--
- | Logback configuration for tests
+ | Logback configuration for ${project.name} ${project.version}
  !-->
 <configuration>
   <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
@@ -14,6 +14,5 @@
     <appender-ref ref="console" />
   </root>
 
-  <logger name="org.example" level="off" />
-  <logger name="com.hexagonkt" level="off" />
+  <logger name="com.hexagonkt" level="info"/>
 </configuration>
