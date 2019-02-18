@@ -1,17 +1,19 @@
 
-rootProject.name = "gradle_starter_foo"
+rootProject.name = "hexgradle"
 
 gradle.rootProject {
 
-    version = "0.1"
-    group = "org.example"
-    description = "Service's description"
+    allprojects {
+        version = "0.1"
+        group = "org.example"
+        description = "Service's description"
+    }
 
-    extensions.gradleScripts = "https://raw.githubusercontent.com/hexagonkt/hexagon/0.25.0/gradle"
+    extensions.gradleScripts = "https://raw.githubusercontent.com/hexagonkt/hexagon/0.25.3/gradle"
 
-    extensions.kotlinVersion = "1.3.20"
-    extensions.kotlinCoroutinesVersion = "1.1.0"
-    extensions.hexagonVersion = "0.25.0"
+    extensions.kotlinVersion = "1.3.21"
+    extensions.kotlinCoroutinesVersion = "1.1.1"
+    extensions.hexagonVersion = "0.25.3"
     extensions.logbackVersion = "1.2.3"
 
     extensions.junitVersion = "4.12"

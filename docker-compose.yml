@@ -2,7 +2,7 @@
 version: '3'
 
 services:
-  gradle_starter:
+  hexgradle:
     build:
       context: .
     ports:
