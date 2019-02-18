@@ -1,5 +1,5 @@
 
-rootProject.name = "hexgradle"
+rootProject.name = "gradle_starter"
 
 gradle.rootProject {
 
