@@ -24,6 +24,6 @@ val server: Server by lazy {
  */
 fun main() {
     bindObject<ServerPort>(JettyServletAdapter())
-    server.run()
+    server.start()
 }
 

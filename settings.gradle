@@ -9,11 +9,11 @@ gradle.rootProject {
         description = "Service's description"
     }
 
-    extensions.gradleScripts = "https://raw.githubusercontent.com/hexagonkt/hexagon/0.25.3/gradle"
+    extensions.gradleScripts = "https://raw.githubusercontent.com/hexagonkt/hexagon/0.25.9/gradle"
 
     extensions.kotlinVersion = "1.3.21"
     extensions.kotlinCoroutinesVersion = "1.1.1"
-    extensions.hexagonVersion = "0.25.3"
+    extensions.hexagonVersion = "0.25.9"
     extensions.logbackVersion = "1.2.3"
 
     extensions.junitVersion = "4.12"
