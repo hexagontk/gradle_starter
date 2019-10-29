@@ -1,5 +1,6 @@
 package org.example
 
+import com.hexagonkt.helpers.logger
 import java.time.LocalDateTime.now
 
 import com.hexagonkt.http.httpDate
@@ -25,5 +26,5 @@ val server: Server by lazy {
 fun main() {
     bindObject<ServerPort>(JettyServletAdapter())
     server.start()
+    logger.info { "Application started" }
 }
-
