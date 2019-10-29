@@ -17,11 +17,13 @@ out/
 # VS Code
 .vscode/
 
-# Other Tools
-.lazybones/
-.java-version
-
 # Runtime
 log/
 *.log
 *.hprof
+.attach_pid*
+hs_err_pid*
+
+# Others
+.DS_Store
+.java-version
