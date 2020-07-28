@@ -7,9 +7,8 @@ This is an Hexagon service created from a template.
 
 * Build: `./gradlew build`
 * Rebuild: `./gradlew clean build`
-* Assemble: `./gradlew installDist`
 * Run: `./gradlew run`
-* Watch: `./gradlew --no-daemon --continuous runService`
+* Watch: `./gradlew -t watch`
 * Test: `./gradlew test`
 * Run Container (after assemble): `docker-compose up -d`
 

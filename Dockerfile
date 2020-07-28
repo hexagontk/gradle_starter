@@ -2,7 +2,8 @@
 FROM openjdk:11
 ENV PROJECT gradle_starter
 
-COPY build/install/$PROJECT /opt/$PROJECT
-WORKDIR /opt/$PROJECT
+USER 1000
+ADD --chown=1000:1000 build/distributions/$PROJECT*.tar /opt
+WORKDIR /opt/$PROJECT*
 EXPOSE 9090
-ENTRYPOINT /opt/$PROJECT/bin/$PROJECT
+ENTRYPOINT /opt/$PROJECT*/bin/$PROJECT

@@ -1,8 +1,11 @@
 
+# Private / Local
+private_*
+local_*
+
 # Gradle
 .gradle/
 build/
-local.*
 
 # Eclipse
 .settings/
@@ -24,6 +27,11 @@ log/
 .attach_pid*
 hs_err_pid*
 
-# Others
-.DS_Store
+# Other Tools
+node_modules/
 .java-version
+package-lock.json
+
+# System Files
+.DS_Store
+Thumbs.db

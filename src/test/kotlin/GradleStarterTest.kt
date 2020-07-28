@@ -1,31 +1,30 @@
 package org.example
 
 import com.hexagonkt.http.client.Client
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
+import com.hexagonkt.http.client.ahc.AhcAdapter
+import io.kotest.core.spec.style.StringSpec
 
-class GradleStarterTest {
+class GradleStarterTest : StringSpec({
 
-    private val client by lazy { Client("http://localhost:${server.runtimePort}") }
+    val client by lazy { Client(AhcAdapter(), "http://localhost:${server.runtimePort}") }
 
-    @Before fun startup() {
+    beforeSpec {
         main()
     }
 
-    @After fun shutdown() {
+    afterSpec {
         server.stop()
     }
 
-    @Test fun `HTTP request returns proper status, headers and body`() {
+    "HTTP request returns proper status, headers and body" {
         val response = client.get("/text")
-        val content = response.responseBody
+        val content = response.body
 
         assert(response.headers["Date"] != null)
         assert(response.headers["Server"] != null)
         assert(response.headers["Transfer-Encoding"] != null)
-        assert(response.headers["Content-Type"] == "text/plain")
+        assert(response.headers["Content-Type"]?.first() == "text/plain")
 
         assert("Hello, World!" == content)
     }
-}
+})
