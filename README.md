@@ -1,5 +1,5 @@
 
-# Gradle Starter Service
+# Gradle Starter Application
 
 This is an Hexagon service created from a template.
 
