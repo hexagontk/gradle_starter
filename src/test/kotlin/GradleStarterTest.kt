@@ -3,6 +3,8 @@ package org.example
 import com.hexagonkt.http.client.Client
 import com.hexagonkt.http.client.ahc.AhcAdapter
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.nulls.shouldNotBeNull
+import io.kotest.matchers.shouldBe
 
 class GradleStarterTest : StringSpec({
 
@@ -20,11 +22,11 @@ class GradleStarterTest : StringSpec({
         val response = client.get("/text")
         val content = response.body
 
-        assert(response.headers["Date"] != null)
-        assert(response.headers["Server"] != null)
-        assert(response.headers["Transfer-Encoding"] != null)
-        assert(response.headers["Content-Type"]?.first() == "text/plain")
+        response.headers["Date"].shouldNotBeNull()
+        response.headers["Server"].shouldNotBeNull()
+        response.headers["Transfer-Encoding"].shouldNotBeNull()
+        response.headers["Content-Type"]?.first() shouldBe "text/plain"
 
-        assert("Hello, World!" == content)
+        "Hello, World!" shouldBe content
     }
 })

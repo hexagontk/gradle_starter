@@ -1,5 +1,5 @@
 
-FROM openjdk:11
+FROM adoptopenjdk:11-jre-hotspot-bionic
 ENV PROJECT gradle_starter
 
 USER 1000
