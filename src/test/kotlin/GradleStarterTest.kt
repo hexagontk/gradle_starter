@@ -22,9 +22,7 @@ class GradleStarterTest : StringSpec({
         val response = client.get("/text")
         val content = response.body
 
-        response.headers["Date"].shouldNotBeNull()
         response.headers["Server"].shouldNotBeNull()
-        response.headers["Transfer-Encoding"].shouldNotBeNull()
         response.headers["Content-Type"]?.first() shouldBe "text/plain"
 
         "Hello, World!" shouldBe content

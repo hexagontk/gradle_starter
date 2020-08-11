@@ -1,6 +1,4 @@
-<!--
- | Logback configuration for tests
- !-->
+
 <configuration>
   <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
@@ -12,7 +10,6 @@
     <appender-ref ref="console" />
   </root>
 
-  <logger name="java.lang.System" level="info"/>
   <logger name="com.hexagonkt" level="info" />
   <logger name="org.example" level="trace" />
 </configuration>
