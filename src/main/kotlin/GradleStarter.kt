@@ -4,9 +4,11 @@ import com.hexagonkt.helpers.logger
 import com.hexagonkt.http.server.*
 import com.hexagonkt.http.server.jetty.JettyServletAdapter
 import com.hexagonkt.injection.InjectionManager
+import java.net.InetAddress
 
 internal val injector = InjectionManager.apply {
-    bindObject<ServerPort>(JettyServletAdapter())
+    bind<ServerPort>(JettyServletAdapter())
+    bind(ServerSettings(bindPort = 9090, bindAddress = InetAddress.getByName("0.0.0.0")))
 }
 
 internal val server: Server = Server {
