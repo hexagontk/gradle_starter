@@ -2,29 +2,34 @@ package org.example
 
 import com.hexagonkt.http.client.Client
 import com.hexagonkt.http.client.ahc.AhcAdapter
-import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.nulls.shouldNotBeNull
-import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
 
-class GradleStarterTest : StringSpec({
+@TestInstance(PER_CLASS)
+internal class GradleStarterTest {
 
-    val client by lazy { Client(AhcAdapter(), "http://localhost:${server.runtimePort}") }
+    private val client by lazy { Client(AhcAdapter(), "http://localhost:${server.runtimePort}") }
 
-    beforeSpec {
+    @BeforeAll
+    fun beforeSpec() {
         main()
     }
 
-    afterSpec {
+    @AfterAll
+    fun afterSpec() {
         server.stop()
     }
 
-    "HTTP request returns proper status, headers and body" {
+    @Test fun `HTTP request returns proper status, headers and body`() {
         val response = client.get("/text")
         val content = response.body
 
-        response.headers["Server"].shouldNotBeNull()
-        response.headers["Content-Type"]?.first() shouldBe "text/plain"
+        assert(response.headers["Server"] != null)
+        assert(response.headers["Content-Type"]?.first() == "text/plain")
 
-        "Hello, World!" shouldBe content
+        assert("Hello, World!" == content)
     }
-})
+}

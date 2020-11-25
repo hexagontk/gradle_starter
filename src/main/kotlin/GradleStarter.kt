@@ -6,7 +6,7 @@ import com.hexagonkt.http.server.jetty.JettyServletAdapter
 import com.hexagonkt.injection.InjectionManager
 
 internal val injector = InjectionManager.apply {
-    bindObject<ServerPort>(JettyServletAdapter())
+    bind<ServerPort>(JettyServletAdapter())
 }
 
 internal val server: Server = Server {
