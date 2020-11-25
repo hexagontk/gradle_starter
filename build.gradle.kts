@@ -27,3 +27,11 @@ dependencies {
 
     "testImplementation"("com.hexagonkt:http_client_ahc:$hexagonVersion")
 }
+
+//tasks.test {
+//    jvmArgs(
+//        listOf(
+//            "-agentlib:native-image-agent=config-output-dir=build/resources/main/META-INF/native-image"
+//        )
+//    )
+//}
