@@ -1,6 +1,6 @@
 
 plugins {
-    kotlin("jvm") version "1.4.20"
+    kotlin("jvm") version "1.4.21"
     id("application")
 }
 
@@ -16,6 +16,7 @@ application {
 
 dependencies {
     "implementation"("com.hexagonkt:http_server_jetty:$hexagonVersion")
+    "implementation"("com.hexagonkt:logging_slf4j:$hexagonVersion")
 
     // Logging
     "implementation"("ch.qos.logback:logback-classic:1.2.3")
