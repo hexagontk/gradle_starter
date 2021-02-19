@@ -1,7 +1,7 @@
 
 Gradle Starter Application
 ==========================
-This is an Hexagon service created from a template.
+This is a Hexagon service created from a template.
 
 Software Requirements
 ---------------------
@@ -27,7 +27,7 @@ The reports are located in the `build/reports` directory after building the proj
 
 Gradle Wrapper Setup
 --------------------
-You can change Gradle version in `gradle/wrapper/gradle-wrapper.properties`.
+You can change the Gradle version in `gradle/wrapper/gradle-wrapper.properties`.
 
 Usage
 -----
