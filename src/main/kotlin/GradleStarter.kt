@@ -35,16 +35,10 @@ internal fun main() {
 
 /*
 $h/Software/graalvm_21_jdk11/bin/native-image \
-  --initialize-at-run-time=com.hexagonkt.logging.jul.JulLoggingAdapter \
-  --initialize-at-run-time=org.example.GradleStarterKt \
-  --initialize-at-run-time=com.hexagonkt.ClasspathHandler \
-  --initialize-at-run-time=kotlin.jvm.internal.Reflection \
-  --initialize-at-run-time=com.hexagonkt.injection.InjectionManager \
-  --initialize-at-run-time=com.hexagonkt.logging.LoggingManager \
-  --initialize-at-run-time=com.hexagonkt.logging.Logger \
+  --initialize-at-run-time=com.hexagonkt \
+  --initialize-at-run-time=org.example \
+  --initialize-at-run-time=kotlin.jvm.internal \
   --initialize-at-run-time=kotlin.text.Regex \
-  --initialize-at-run-time=kotlin.jvm.internal.CallableReference \
-  --initialize-at-run-time=com.hexagonkt.logging.jul.JulLoggingAdapter \
-  --initialize-at-run-time=com.hexagonkt.ClasspathHandler \
+  --enable-https \
   -jar build/libs/gradle_starter-all-0.1.0.jar
  */
