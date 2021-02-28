@@ -10,7 +10,7 @@ val hexagonVersion = properties["hexagonVersion"]
 apply(from = "$gradleScripts/kotlin.gradle")
 apply(from = "$gradleScripts/application.gradle")
 
-application {
+extensions.configure<JavaApplication> {
     mainClass.set("org.example.GradleStarterKt")
 }
 

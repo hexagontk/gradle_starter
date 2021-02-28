@@ -6,13 +6,14 @@ import com.hexagonkt.http.server.jetty.JettyServletAdapter
 import com.hexagonkt.injection.InjectionManager
 import com.hexagonkt.logging.LoggingPort
 import com.hexagonkt.logging.Slf4jLoggingAdapter
-import java.net.InetAddress
 
 internal val injector by lazy {
     InjectionManager.apply {
         bind<LoggingPort>(Slf4jLoggingAdapter)
         bind<ServerPort>(JettyServletAdapter())
-        bind(ServerSettings(bindPort = 9090, bindAddress = InetAddress.getByName("0.0.0.0")))
+        bind(ServerSettings(bindPort = 9090))
+        // Bind to 0.0.0.0 is really slow on linux (check settings)
+//        bind(ServerSettings(bindPort = 9090, bindAddress = InetAddress.getByName("0.0.0.0")))
     }
 }
 
