@@ -16,15 +16,7 @@ extensions.configure<JavaApplication> {
 
 dependencies {
     "implementation"("com.hexagonkt:http_server_jetty:$hexagonVersion")
-    "implementation"("com.hexagonkt:logging_slf4j:$hexagonVersion")
-
-    // Logging
-    "implementation"("ch.qos.logback:logback-classic:1.2.3")
-//    "implementation"("org.slf4j:slf4j-simple:1.7.30")
-//    "implementation"("org.slf4j:slf4j-jdk14:1.7.30")
-    "runtimeOnly"("org.slf4j:jcl-over-slf4j:1.7.30")
-    "runtimeOnly"("org.slf4j:log4j-over-slf4j:1.7.30")
-    "runtimeOnly"("org.slf4j:jul-to-slf4j:1.7.30")
+    "implementation"("com.hexagonkt:logging_logback:$hexagonVersion")
 
     "testImplementation"("com.hexagonkt:http_client_ahc:$hexagonVersion")
 }
@@ -36,3 +28,13 @@ dependencies {
 //        )
 //    )
 //}
+
+/*
+$h/Software/graalvm_21_jdk11/bin/native-image \
+  --initialize-at-run-time=com.hexagonkt \
+  --initialize-at-run-time=org.example \
+  --initialize-at-run-time=kotlin.jvm.internal \
+  --initialize-at-run-time=kotlin.text.Regex \
+  --enable-https \
+  -jar build/libs/gradle_starter-all-0.1.0.jar
+ */
