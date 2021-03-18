@@ -8,6 +8,7 @@ local_*
 build/
 
 # Eclipse
+bin/
 .settings/
 .project
 .classpath
