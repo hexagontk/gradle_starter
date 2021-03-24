@@ -15,8 +15,8 @@ extensions.configure<JavaApplication> {
 }
 
 dependencies {
+//    "implementation"("org.graalvm.sdk:graal-sdk:21.0.0.2")
     "implementation"("com.hexagonkt:http_server_jetty:$hexagonVersion")
-    "implementation"("com.hexagonkt:logging_logback:$hexagonVersion")
 
     "testImplementation"("com.hexagonkt:http_client_ahc:$hexagonVersion")
 }
@@ -30,11 +30,8 @@ dependencies {
 //}
 
 /*
-$h/Software/graalvm_21_jdk11/bin/native-image \
-  --initialize-at-run-time=com.hexagonkt \
-  --initialize-at-run-time=org.example \
-  --initialize-at-run-time=kotlin.jvm.internal \
-  --initialize-at-run-time=kotlin.text.Regex \
+$h/Software/graalvm_21_jdk11/bin/native-image \                                                                                                                                                                                                                                              🐳 v20.10.5
+  --initialize-at-build-time=com.hexagonkt.ClasspathHandler \
   --enable-https \
   -jar build/libs/gradle_starter-all-0.1.0.jar
  */
