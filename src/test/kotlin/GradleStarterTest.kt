@@ -1,5 +1,6 @@
 package org.example
 
+import com.hexagonkt.helpers.println
 import com.hexagonkt.http.client.Client
 import com.hexagonkt.http.client.ahc.AhcAdapter
 import org.junit.jupiter.api.AfterAll
@@ -27,7 +28,7 @@ internal class GradleStarterTest {
 
     @Test fun `HTTP request returns proper status, headers and body`() {
         val response = client.get("/text")
-        val content = response.body
+        val content = response.body.println()
 
         assertNotNull(response.headers["Server"])
         assertEquals("text/plain", response.headers["Content-Type"]?.first())
