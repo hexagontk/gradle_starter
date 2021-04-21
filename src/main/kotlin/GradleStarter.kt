@@ -1,13 +1,13 @@
 package org.example
 
 import com.hexagonkt.helpers.logger
-import com.hexagonkt.http.server.*
+import com.hexagonkt.http.server.Server
+import com.hexagonkt.http.server.ServerPort
+import com.hexagonkt.http.server.ServerSettings
 import com.hexagonkt.http.server.jetty.JettyServletAdapter
 import com.hexagonkt.injection.InjectionManager
 import com.hexagonkt.logging.LoggingPort
 import com.hexagonkt.logging.Slf4jJulLoggingAdapter
-
-//import org.graalvm.nativeimage.hosted.RuntimeClassInitialization
 
 internal val injector by lazy {
     InjectionManager.apply {
@@ -32,8 +32,6 @@ internal val server: Server by lazy {
 }
 
 internal fun main() {
-//    RuntimeClassInitialization.initializeAtBuildTime(ClasspathHandler::class.java)
-    System.setProperty("com.hexagonkt.noJmx", "no")
     logger.info { injector }
     server.start()
 }
