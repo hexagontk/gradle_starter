@@ -1,6 +1,6 @@
 
 plugins {
-    kotlin("jvm") version "1.4.32"
+    kotlin("jvm") version "1.5.20"
     id("application")
 }
 
@@ -17,14 +17,17 @@ extensions.configure<JavaApplication> {
 dependencies {
 //    "implementation"("org.graalvm.sdk:graal-sdk:21.0.0.2")
     "implementation"("com.hexagonkt:http_server_jetty:$hexagonVersion")
+    "implementation"("com.hexagonkt:logging_slf4j_jul:$hexagonVersion")
 
     "testImplementation"("com.hexagonkt:http_client_ahc:$hexagonVersion")
 }
 
 //tasks.test {
+//    val dir="build/resources/main"
+//    val dir="src/main/resources"
 //    jvmArgs(
 //        listOf(
-//            "-agentlib:native-image-agent=config-output-dir=build/resources/main/META-INF/native-image"
+//            "-agentlib:native-image-agent=config-output-dir=$dir/META-INF/native-image"
 //        )
 //    )
 //}

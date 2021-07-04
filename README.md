@@ -1,19 +1,16 @@
 
-Gradle Starter Application
-==========================
+# Gradle Starter Application
 This is a Hexagon service created from a template.
 
-Software Requirements
----------------------
+## Software Requirements
 To build the application you will need:
-* JDK 11+ for compiling the sources.
+* JDK 8+ for compiling the sources.
 * An Internet connection to download the dependencies.
 
 To run the application:
-* JRE 11+ (JDK is not required at runtime).
+* JRE 8+ (JDK is not required at runtime).
 
-Development
------------
+## Development
 * Build: `./gradlew build`
 * Rebuild: `./gradlew clean build`
 * Run: `./gradlew run`
@@ -25,18 +22,21 @@ Development
 
 The reports are located in the `build/reports` directory after building the project.
 
-Gradle Wrapper Setup
---------------------
+## Gradle Wrapper Setup
 You can change the Gradle version in `gradle/wrapper/gradle-wrapper.properties`.
 
-Usage
------
+## Docker
+Prior to generate the Docker image, you need to create the service distribution:
+`./gradlew installDist`. After that you can start the whole service stack executing:
+`docker-compose up -d`.
+
+## Usage
 After building the project (`./gradlew build`), archives with the application's distributions are
 stored in `build/distributions`.
 
 To install the application you just need to unpack one distribution file.
 
-After installing the application, you can run the application executing the `bin/organization_space`
+After installing the application, you can run the application executing the `bin/gradle_starter`
 script.
 
 Logs are stored in the `log` directory inside the script's execution directory.
