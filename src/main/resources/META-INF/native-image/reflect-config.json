@@ -24,9 +24,6 @@
   "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
 },
 {
-  "name":"java.lang.RuntimePermission"
-},
-{
   "name":"java.lang.Short",
   "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
 },
@@ -39,43 +36,15 @@
   "methods":[{"name":"getUptime","parameterTypes":[] }]
 },
 {
-  "name":"java.net.NetPermission"
-},
-{
-  "name":"java.net.SocketPermission"
-},
-{
-  "name":"java.net.URLPermission",
-  "methods":[{"name":"<init>","parameterTypes":["java.lang.String","java.lang.String"] }]
-},
-{
-  "name":"java.security.AllPermission"
-},
-{
-  "name":"java.security.SecurityPermission"
-},
-{
-  "name":"java.util.PropertyPermission"
-},
-{
-  "name":"javax.management.ObjectName"
-},
-{
-  "name":"kotlin.jvm.internal.DefaultConstructorMarker"
-},
-{
   "name":"org.eclipse.jetty.servlet.ServletHandler$Default404Servlet",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"org.eclipse.jetty.servlet.ServletMapping[]"
-},
-{
   "name":"org.eclipse.jetty.util.TypeUtil",
   "methods":[
-    {"name":"getClassLoaderLocation","parameterTypes":["java.lang.Class"] },
-    {"name":"getCodeSourceLocation","parameterTypes":["java.lang.Class"] },
-    {"name":"getModuleLocation","parameterTypes":["java.lang.Class"] },
+    {"name":"getClassLoaderLocation","parameterTypes":["java.lang.Class"] }, 
+    {"name":"getCodeSourceLocation","parameterTypes":["java.lang.Class"] }, 
+    {"name":"getModuleLocation","parameterTypes":["java.lang.Class"] }, 
     {"name":"getSystemClassLoaderLocation","parameterTypes":["java.lang.Class"] }
   ]
 }

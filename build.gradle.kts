@@ -1,6 +1,6 @@
 
 plugins {
-    kotlin("jvm") version "1.5.20"
+    kotlin("jvm") version "1.5.21"
     id("application")
 }
 
@@ -15,11 +15,11 @@ extensions.configure<JavaApplication> {
 }
 
 dependencies {
-//    "implementation"("org.graalvm.sdk:graal-sdk:21.0.0.2")
-    "implementation"("com.hexagonkt:http_server_jetty:$hexagonVersion")
-    "implementation"("com.hexagonkt:logging_slf4j_jul:$hexagonVersion")
+//    implementation("org.graalvm.sdk:graal-sdk:21.0.0.2")
+    implementation("com.hexagonkt:http_server_jetty:$hexagonVersion")
+    implementation("com.hexagonkt:logging_slf4j_jul:$hexagonVersion")
 
-    "testImplementation"("com.hexagonkt:http_client_ahc:$hexagonVersion")
+    testImplementation("com.hexagonkt:http_client_ahc:$hexagonVersion")
 }
 
 //tasks.test {
