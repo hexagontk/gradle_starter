@@ -1,6 +1,6 @@
 
 plugins {
-    kotlin("jvm") version "1.5.21"
+    kotlin("jvm") version "1.5.30"
     id("application")
 }
 
@@ -33,7 +33,7 @@ dependencies {
 //}
 
 /*
-$h/Software/graalvm_21_jdk11/bin/native-image \                                                                                                                                                                                                                                              🐳 v20.10.5
+$h/Software/graalvm_21_jdk11/bin/native-image \
   --initialize-at-build-time=com.hexagonkt.ClasspathHandler \
   --enable-https \
   -jar build/libs/gradle_starter-all-0.1.0.jar
