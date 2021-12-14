@@ -2,10 +2,8 @@ package org.example
 
 import com.hexagonkt.http.server.*
 import com.hexagonkt.http.server.jetty.JettyServletAdapter
-import com.hexagonkt.logging.LoggingManager
-import com.hexagonkt.logging.Slf4jJulLoggingAdapter
-
-//import org.graalvm.nativeimage.hosted.RuntimeClassInitialization
+import com.hexagonkt.core.logging.LoggingManager
+import com.hexagonkt.logging.slf4j.jul.Slf4jJulLoggingAdapter
 
 internal val server: Server by lazy {
     // Bind to 0.0.0.0 is really slow on linux (check settings)
@@ -21,10 +19,6 @@ internal val server: Server by lazy {
 }
 
 internal fun main() {
-//    RuntimeClassInitialization.initializeAtBuildTime(ClasspathHandler::class.java)
-
     LoggingManager.adapter = Slf4jJulLoggingAdapter
-
-    System.setProperty("com.hexagonkt.noJmx", "no")
     server.start()
 }
