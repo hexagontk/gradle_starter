@@ -7,4 +7,4 @@ services:
     build:
       context: .
     ports:
-      - 9999:9090
+      - "9999:9090"
