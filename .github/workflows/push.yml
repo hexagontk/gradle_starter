@@ -9,26 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # SET UP
       - name: Check Out
         uses: actions/checkout@v2
-      - name: Install Java
-        uses: actions/setup-java@v2
-        with: { java-version: 11, distribution: adopt }
-      - name: Restore Cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: ${{ runner.os }}-gradle-
-
-      # PROCESS
       - name: Build Project
-        run: ./gradlew --warn --console=plain build
-
-      - name: Upload Tests Reports (ON FAILURE)
-        uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: test_reports
-          path: "*/build/**/TEST-*.xml"
+        uses: ./.github/actions/gradle
