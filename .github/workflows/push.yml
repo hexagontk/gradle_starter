@@ -12,4 +12,4 @@ jobs:
       - name: Check Out
         uses: actions/checkout@v2
       - name: Build Project
-        uses: ./.github/actions/gradle
+        uses: hexagonkt/.github/.github/actions/gradle
