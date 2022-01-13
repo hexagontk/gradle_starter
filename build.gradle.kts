@@ -1,7 +1,7 @@
 
 plugins {
-    kotlin("jvm") version "1.6.0"
-    id("application")
+    kotlin("jvm") version("1.6.10")
+    id("org.jetbrains.dokka") version("1.6.10")
 }
 
 val gradleScripts = properties["gradleScripts"]
@@ -18,7 +18,7 @@ dependencies {
     implementation("com.hexagonkt:http_server_jetty:$hexagonVersion")
     implementation("com.hexagonkt:logging_slf4j_jul:$hexagonVersion")
 
-    testImplementation("com.hexagonkt:http_client_ahc:$hexagonVersion")
+    testImplementation("com.hexagonkt:http_client_jetty:$hexagonVersion")
 }
 
 tasks.register<Exec>("nativeImage") {
@@ -26,10 +26,11 @@ tasks.register<Exec>("nativeImage") {
 
     commandLine(
         listOf(
-            "${System.getProperty("user.home")}/.sdkman/candidates/java/current/bin/native-image",
+            "native-image",
             "--no-fallback",
             "--enable-http",
             "--enable-https",
+            "--enable-url-protocols=classpath",
             "--initialize-at-build-time=com.hexagonkt.core.ClasspathHandler",
             "-jar",
             "$buildDir/libs/${project.name}-all-${project.version}.jar",
@@ -45,27 +46,20 @@ tasks.register<Exec>("upx") {
 }
 
 // Should be executed in integration tests (application running in its own VM). To avoid including
-// tests classpath into image configuration
-// Check https://www.graalvm.org/reference-manual/native-image/BuildConfiguration/#embedding-a-configuration-file
+// tests classpath into image configuration. Check:
+// www.graalvm.org/reference-manual/native-image/BuildConfiguration/#embedding-a-configuration-file
 // on how to add Native Image config to libraries' jars (using guid/aid in META-INF)
-//
-//tasks.test {
-//    val dir="$buildDir/resources/main"
-//    val filter="$projectDir/src/test/resources/native_image_filter.json"
-//    val configOutput="config-output-dir=$dir/META-INF/native-image"
-//    val accessFilter="access-filter-file=$filter"
-//    val callerFilter="caller-filter-file=$filter"
-//    jvmArgs(listOf("-agentlib:native-image-agent=$configOutput,$accessFilter,$callerFilter"))
-//}
+tasks.register<Exec>("agentRun") {
+    dependsOn("jarAll")
 
-// native_image_filter.json
-//
-//{
-//  "rules": [
-//    { "excludeClasses": "io.netty.**" },
-//    { "excludeClasses": "org.asynchttpclient.**" },
-//    { "excludeClasses": "org.gradle.**" },
-//    { "excludeClasses": "org.jacoco.**" },
-//    { "excludeClasses": "org.junit.**" }
-//  ]
-//}
+    val dir="$buildDir/resources/main"
+    val configOutput="config-output-dir=$dir/META-INF/native-image"
+
+    commandLine(listOf(
+        "java",
+        "-agentlib:native-image-agent=$configOutput",
+        "-jar",
+        "$buildDir/libs/${project.name}-all-${project.version}.jar",
+        "$buildDir/${project.name}"
+    ))
+}
