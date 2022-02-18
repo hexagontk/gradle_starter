@@ -1,7 +1,7 @@
 package org.example
 
 import com.hexagonkt.http.server.*
-import com.hexagonkt.http.server.jetty.JettyServletAdapter
+import com.hexagonkt.http.server.netty.NettyServerAdapter
 import com.hexagonkt.core.logging.LoggingManager
 import com.hexagonkt.core.logging.info
 import com.hexagonkt.core.media.TextMedia.PLAIN
@@ -11,7 +11,7 @@ import java.net.URL
 
 internal val server: HttpServer by lazy {
     // Bind to 0.0.0.0 is really slow on linux (check settings)
-    HttpServer(JettyServletAdapter(), HttpServerSettings(bindPort = 9090)) {
+    HttpServer(NettyServerAdapter(), HttpServerSettings(bindPort = 9090)) {
         on("*") {
             send(headers = response.headers + ("server" to "Servlet/3.1"))
         }

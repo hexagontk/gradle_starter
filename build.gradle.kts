@@ -15,7 +15,7 @@ extensions.configure<JavaApplication> {
 }
 
 dependencies {
-    implementation("com.hexagonkt:http_server_jetty:$hexagonVersion")
+    implementation("com.hexagonkt:http_server_netty:$hexagonVersion")
     implementation("com.hexagonkt:logging_slf4j_jul:$hexagonVersion")
 
     testImplementation("com.hexagonkt:http_client_jetty:$hexagonVersion")
@@ -32,6 +32,24 @@ tasks.register<Exec>("nativeImage") {
             "--enable-https",
             "--enable-url-protocols=classpath",
             "--initialize-at-build-time=com.hexagonkt.core.ClasspathHandler",
+
+            // Netty options (not needed for Jetty)
+            "--initialize-at-build-time=org.slf4j.LoggerFactory",
+            "--initialize-at-build-time=org.slf4j.impl.JDK14LoggerAdapter",
+            "--initialize-at-build-time=org.slf4j.impl.StaticLoggerBinder",
+            "--allow-incomplete-classpath",
+            "--initialize-at-run-time=io.netty.internal.tcnative.AsyncSSLPrivateKeyMethod",
+            "--initialize-at-run-time=io.netty.internal.tcnative.SSL",
+            "--initialize-at-run-time=io.netty.internal.tcnative.CertificateVerifier",
+            "--initialize-at-run-time=io.netty.handler.ssl.OpenSslPrivateKeyMethod",
+            "--initialize-at-run-time=io.netty.handler.ssl.ReferenceCountedOpenSslEngine",
+            "--initialize-at-run-time=io.netty.handler.ssl.OpenSslAsyncPrivateKeyMethod",
+            "--initialize-at-run-time=io.netty.handler.ssl.JettyNpnSslEngine",
+            "--initialize-at-run-time=io.netty.internal.tcnative.SSLPrivateKeyMethod",
+            "--initialize-at-run-time=io.netty.handler.ssl.JdkNpnApplicationProtocolNegotiator",
+            "--initialize-at-run-time=io.netty.handler.ssl.ConscryptAlpnSslEngine",
+            "--initialize-at-run-time=org.bouncycastle.jsse.BCSSLEngine",
+
             "-jar",
             "$buildDir/libs/${project.name}-all-${project.version}.jar",
             "$buildDir/${project.name}",
