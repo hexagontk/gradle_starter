@@ -3,7 +3,6 @@ package org.example
 import com.hexagonkt.core.media.TextMedia
 import com.hexagonkt.http.client.HttpClient
 import com.hexagonkt.http.client.jetty.JettyClientAdapter
-import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -30,7 +29,7 @@ internal class GradleStarterTest {
         server.stop()
     }
 
-    @Test fun `HTTP request returns proper status, headers and body`() = runBlocking {
+    @Test fun `HTTP request returns proper status, headers and body`() {
         val response = client.get("/text")
         val content = response.body
 
