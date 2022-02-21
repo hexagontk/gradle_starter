@@ -21,6 +21,29 @@ dependencies {
     testImplementation("com.hexagonkt:http_client_jetty:$hexagonVersion")
 }
 
+tasks.register<Exec>("jlink") {
+    val command = listOf(
+        "jlink",
+        "--add-modules",
+        "java.logging,java.management",
+        "--compress=2",
+        "--strip-debug",
+        "--no-header-files",
+        "--no-man-pages",
+        "--output",
+        "$buildDir/jre",
+    )
+    commandLine(command)
+}
+
+tasks.register<Copy>("jre") {
+    dependsOn("jarAll")
+
+    from("$buildDir/libs")
+    include("${project.name}-all-${project.version}.jar")
+    into("$buildDir/jre/lib")
+}
+
 tasks.register<Exec>("nativeImage") {
     dependsOn("jarAll")
 
