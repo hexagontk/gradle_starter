@@ -1,5 +1,5 @@
 
-FROM adoptopenjdk:11-jre-hotspot-bionic
+FROM eclipse-temurin:11-jre-alpine
 LABEL description="description"
 
 # Project setup
