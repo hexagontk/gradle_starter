@@ -1,7 +1,8 @@
 
 plugins {
-    kotlin("jvm") version("1.6.10")
-    id("org.jetbrains.dokka") version("1.6.10")
+    kotlin("jvm") version("1.6.21")
+    id("org.jetbrains.dokka") version("1.6.21")
+    id("org.graalvm.buildtools.native") version("0.9.11")
 }
 
 val gradleScripts = properties["gradleScripts"]
@@ -19,29 +20,6 @@ dependencies {
     implementation("com.hexagonkt:logging_slf4j_jul:$hexagonVersion")
 
     testImplementation("com.hexagonkt:http_client_jetty:$hexagonVersion")
-}
-
-tasks.register<Exec>("jlink") {
-    val command = listOf(
-        "jlink",
-        "--add-modules",
-        "java.logging,java.management",
-        "--compress=2",
-        "--strip-debug",
-        "--no-header-files",
-        "--no-man-pages",
-        "--output",
-        "$buildDir/jre",
-    )
-    commandLine(command)
-}
-
-tasks.register<Copy>("jre") {
-    dependsOn("jarAll")
-
-    from("$buildDir/libs")
-    include("${project.name}-all-${project.version}.jar")
-    into("$buildDir/jre/lib")
 }
 
 tasks.register<Exec>("nativeImage") {
