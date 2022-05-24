@@ -5,16 +5,19 @@ import com.hexagonkt.http.server.netty.NettyServerAdapter
 import com.hexagonkt.core.logging.LoggingManager
 import com.hexagonkt.core.media.TextMedia.PLAIN
 import com.hexagonkt.http.model.ContentType
-import com.hexagonkt.http.server.handlers.exceptionHandler
+import com.hexagonkt.http.model.Header
 import com.hexagonkt.logging.slf4j.jul.Slf4jJulLoggingAdapter
+import java.net.InetAddress
+
+internal val settings = HttpServerSettings(
+    bindAddress = InetAddress.getByAddress(byteArrayOf(0, 0, 0, 0)),
+    bindPort = 9090
+)
 
 internal val server: HttpServer by lazy {
-    // Bind to 0.0.0.0 is really slow on linux (check settings)
-    HttpServer(NettyServerAdapter(), HttpServerSettings(bindPort = 9090)) {
-        use(exceptionHandler)
-
+    HttpServer(NettyServerAdapter(), settings) {
         on("*") {
-            send(headers = response.headers + ("server" to "Servlet/3.1"))
+            send(headers = response.headers + Header("server", "Servlet/3.1"))
         }
 
         get("/text") {
@@ -24,6 +27,7 @@ internal val server: HttpServer by lazy {
 }
 
 internal fun main() {
+    LoggingManager.defaultLoggerName = "org.example"
     LoggingManager.adapter = Slf4jJulLoggingAdapter()
     server.start()
 }
