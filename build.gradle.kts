@@ -1,3 +1,4 @@
+import org.graalvm.buildtools.gradle.dsl.GraalVMExtension
 
 plugins {
     kotlin("jvm") version("1.6.21")
@@ -16,13 +17,13 @@ extensions.configure<JavaApplication> {
 }
 
 dependencies {
-    implementation("com.hexagonkt:http_server_netty:$hexagonVersion")
-    implementation("com.hexagonkt:logging_slf4j_jul:$hexagonVersion")
+    "implementation"("com.hexagonkt:http_server_netty:$hexagonVersion")
+    "implementation"("com.hexagonkt:logging_slf4j_jul:$hexagonVersion")
 
-    testImplementation("com.hexagonkt:http_client_jetty:$hexagonVersion")
+    "testImplementation"("com.hexagonkt:http_client_jetty:$hexagonVersion")
 }
 
-graalvmNative {
+extensions.configure<GraalVMExtension> {
     binaries {
         named("main") {
             listOf(
@@ -44,8 +45,8 @@ graalvmNative {
                 "--initialize-at-run-time=io.netty.handler.ssl.OpenSslAsyncPrivateKeyMethod",
                 "--initialize-at-run-time=io.netty.handler.ssl.JettyNpnSslEngine",
                 "--initialize-at-run-time=io.netty.internal.tcnative.SSLPrivateKeyMethod",
-                "--initialize-at-run-time=io.netty.handler.ssl.JdkNpnApplicationProtocolNegotiator",
                 "--initialize-at-run-time=io.netty.handler.ssl.ConscryptAlpnSslEngine",
+                "--initialize-at-run-time=io.netty.handler.ssl.ReferenceCountedOpenSslContext",
                 "--initialize-at-run-time=org.bouncycastle.jsse.BCSSLEngine",
             )
             .forEach(buildArgs::add)

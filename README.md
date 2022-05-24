@@ -43,3 +43,14 @@ Logs are stored in the `log` directory inside the script's execution directory.
 
 Once the application is running, you can send a request executing:
 `curl http://localhost:9090/text`
+
+## Native Image
+```bash
+./gradlew -Pagent test
+./gradlew upx
+
+# Executable
+build/native/nativeCompile/gradle_starter
+# Compressed executable
+build/gradle_starter
+```
