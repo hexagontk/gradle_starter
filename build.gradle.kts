@@ -1,9 +1,16 @@
 import org.graalvm.buildtools.gradle.dsl.GraalVMExtension
+import proguard.gradle.ProGuardTask
 
 plugins {
-    kotlin("jvm") version("1.6.21")
-    id("org.jetbrains.dokka") version("1.6.21")
-    id("org.graalvm.buildtools.native") version("0.9.11")
+    kotlin("jvm") version("1.7.10")
+    id("org.jetbrains.dokka") version("1.7.10")
+    id("org.graalvm.buildtools.native") version("0.9.13")
+}
+
+buildscript {
+    dependencies {
+        classpath("com.guardsquare:proguard-gradle:7.1.0")
+    }
 }
 
 val gradleScripts = properties["gradleScripts"]
@@ -14,6 +21,21 @@ apply(from = "$gradleScripts/application.gradle")
 
 extensions.configure<JavaApplication> {
     mainClass.set("org.example.GradleStarterKt")
+}
+
+// TODO Check: https://www.guardsquare.com/manual/setup/gradle
+tasks.register<ProGuardTask>("proguard") {
+    dependsOn("installDist")
+    injars(file("build/libs/${project.name}-${project.version}.jar"))
+    libraryjars("")
+//    injars(file("build/libs/${project.name}-all-${project.version}.jar"))
+//    dontwarn()
+    keep("class **")
+    keep("class java.**")
+    keep("class javax.**")
+    keep("class com.hexagonkt.**")
+    keep("class io.netty.**")
+    outjars(file("build/libs/${project.name}-proguard-${project.version}.jar"))
 }
 
 dependencies {

@@ -1,5 +1,6 @@
 package org.example
 
+import com.hexagonkt.core.allInterfaces
 import com.hexagonkt.http.server.*
 import com.hexagonkt.http.server.netty.NettyServerAdapter
 import com.hexagonkt.core.logging.LoggingManager
@@ -7,10 +8,9 @@ import com.hexagonkt.core.media.TextMedia.PLAIN
 import com.hexagonkt.http.model.ContentType
 import com.hexagonkt.http.model.Header
 import com.hexagonkt.logging.slf4j.jul.Slf4jJulLoggingAdapter
-import java.net.InetAddress
 
 internal val settings = HttpServerSettings(
-    bindAddress = InetAddress.getByAddress(byteArrayOf(0, 0, 0, 0)),
+    bindAddress = allInterfaces,
     bindPort = 9090
 )
 
