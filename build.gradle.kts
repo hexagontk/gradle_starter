@@ -2,9 +2,9 @@ import org.graalvm.buildtools.gradle.dsl.GraalVMExtension
 import proguard.gradle.ProGuardTask
 
 plugins {
-    kotlin("jvm") version("1.7.10")
-    id("org.jetbrains.dokka") version("1.7.10")
-    id("org.graalvm.buildtools.native") version("0.9.13")
+    kotlin("jvm") version("1.7.20")
+    id("org.jetbrains.dokka") version("1.7.20")
+    id("org.graalvm.buildtools.native") version("0.9.15")
 }
 
 buildscript {
@@ -56,9 +56,8 @@ extensions.configure<GraalVMExtension> {
 
                 // Netty options (not needed for Jetty)
                 "--initialize-at-build-time=org.slf4j.LoggerFactory",
-                "--initialize-at-build-time=org.slf4j.impl.JDK14LoggerAdapter",
+                "--initialize-at-run-time=org.slf4j.impl.JDK14LoggerAdapter",
                 "--initialize-at-build-time=org.slf4j.impl.StaticLoggerBinder",
-                "--allow-incomplete-classpath",
                 "--initialize-at-run-time=io.netty.internal.tcnative.AsyncSSLPrivateKeyMethod",
                 "--initialize-at-run-time=io.netty.internal.tcnative.SSL",
                 "--initialize-at-run-time=io.netty.internal.tcnative.CertificateVerifier",
