@@ -9,7 +9,7 @@ plugins {
 
 buildscript {
     dependencies {
-        classpath("com.guardsquare:proguard-gradle:7.1.0")
+        classpath("com.guardsquare:proguard-gradle:7.2.2")
     }
 }
 
@@ -25,17 +25,32 @@ extensions.configure<JavaApplication> {
 
 // TODO Check: https://www.guardsquare.com/manual/setup/gradle
 tasks.register<ProGuardTask>("proguard") {
-    dependsOn("installDist")
-    injars(file("build/libs/${project.name}-${project.version}.jar"))
-    libraryjars("")
-//    injars(file("build/libs/${project.name}-all-${project.version}.jar"))
-//    dontwarn()
-    keep("class **")
-    keep("class java.**")
-    keep("class javax.**")
+    dependsOn("jarAll")
+
+    injars(file("build/libs/${project.name}-all-${project.version}.jar"))
+    outjars(file("build/libs/${project.name}-proguard-${project.version}.jar"))
+
+    val filter = mapOf("jarfilter" to "!**.jar", "filter" to "!module-info.class")
+    libraryjars(filter, "${System.getProperty("java.home")}/jmods/java.base.jmod")
+    libraryjars(filter, "${System.getProperty("java.home")}/jmods/java.logging.jmod")
+    libraryjars(filter, "${System.getProperty("java.home")}/jmods/java.management.jmod")
+    libraryjars(filter, "${System.getProperty("java.home")}/jmods/java.xml.jmod")
+    libraryjars(filter, "${System.getProperty("java.home")}/jmods/jdk.unsupported.jmod")
+
+    dontnote("kotlin.**")
+    dontnote("kotlinx.**")
+
+    keepkotlinmetadata()
+
+    dontwarn()
+    dontoptimize()
+
+    keep("""class org.example.GradleStarterKt {
+        |   *;
+        |}
+    """.trimMargin())
     keep("class com.hexagonkt.**")
     keep("class io.netty.**")
-    outjars(file("build/libs/${project.name}-proguard-${project.version}.jar"))
 }
 
 dependencies {
@@ -45,6 +60,16 @@ dependencies {
     "testImplementation"("com.hexagonkt:http_client_jetty:$hexagonVersion")
 }
 
+graalvmNative {
+    metadataRepository {
+        enabled.set(true)
+    }
+}
+
+//extensions.configure<GraalVMReachabilityMetadataRepositoryExtension> {
+//    enabled.set(true)
+//}
+
 extensions.configure<GraalVMExtension> {
     binaries {
         named("main") {
@@ -53,22 +78,6 @@ extensions.configure<GraalVMExtension> {
                 "--enable-https",
                 "--enable-url-protocols=classpath",
                 "--initialize-at-build-time=com.hexagonkt.core.ClasspathHandler",
-
-                // Netty options (not needed for Jetty)
-                "--initialize-at-build-time=org.slf4j.LoggerFactory",
-                "--initialize-at-run-time=org.slf4j.impl.JDK14LoggerAdapter",
-                "--initialize-at-build-time=org.slf4j.impl.StaticLoggerBinder",
-                "--initialize-at-run-time=io.netty.internal.tcnative.AsyncSSLPrivateKeyMethod",
-                "--initialize-at-run-time=io.netty.internal.tcnative.SSL",
-                "--initialize-at-run-time=io.netty.internal.tcnative.CertificateVerifier",
-                "--initialize-at-run-time=io.netty.handler.ssl.OpenSslPrivateKeyMethod",
-                "--initialize-at-run-time=io.netty.handler.ssl.ReferenceCountedOpenSslEngine",
-                "--initialize-at-run-time=io.netty.handler.ssl.OpenSslAsyncPrivateKeyMethod",
-                "--initialize-at-run-time=io.netty.handler.ssl.JettyNpnSslEngine",
-                "--initialize-at-run-time=io.netty.internal.tcnative.SSLPrivateKeyMethod",
-                "--initialize-at-run-time=io.netty.handler.ssl.ConscryptAlpnSslEngine",
-                "--initialize-at-run-time=io.netty.handler.ssl.ReferenceCountedOpenSslContext",
-                "--initialize-at-run-time=org.bouncycastle.jsse.BCSSLEngine",
             )
             .forEach(buildArgs::add)
         }
