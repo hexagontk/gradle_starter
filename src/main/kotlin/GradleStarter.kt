@@ -7,7 +7,6 @@ import com.hexagonkt.core.logging.LoggingManager
 import com.hexagonkt.core.media.TextMedia.PLAIN
 import com.hexagonkt.http.model.ContentType
 import com.hexagonkt.http.model.Header
-import com.hexagonkt.logging.slf4j.jul.Slf4jJulLoggingAdapter
 
 internal val settings = HttpServerSettings(
     bindAddress = allInterfaces,
@@ -28,6 +27,5 @@ internal val server: HttpServer by lazy {
 
 internal fun main() {
     LoggingManager.defaultLoggerName = "org.example"
-    LoggingManager.adapter = Slf4jJulLoggingAdapter()
     server.start()
 }

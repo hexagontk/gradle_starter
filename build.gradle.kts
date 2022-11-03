@@ -18,7 +18,6 @@ extensions.configure<JavaApplication> {
 
 dependencies {
     "implementation"("com.hexagonkt:http_server_netty:$hexagonVersion")
-    "implementation"("com.hexagonkt:logging_slf4j_jul:$hexagonVersion")
 
     "testImplementation"("com.hexagonkt:http_client_jetty:$hexagonVersion")
 }
