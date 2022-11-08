@@ -1,8 +1,9 @@
+import org.graalvm.buildtools.gradle.dsl.GraalVMExtension
 
 plugins {
     kotlin("jvm") version("1.7.20")
     id("org.jetbrains.dokka") version("1.7.20")
-    id("org.graalvm.buildtools.native") version("0.9.16")
+    id("org.graalvm.buildtools.native") version("0.9.17")
 }
 
 val gradleScripts = properties["gradleScripts"]
@@ -20,4 +21,19 @@ dependencies {
     "implementation"("com.hexagonkt:http_server_netty:$hexagonVersion")
 
     "testImplementation"("com.hexagonkt:http_client_jetty:$hexagonVersion")
+}
+
+extensions.configure<GraalVMExtension> {
+    binaries {
+        named("main") {
+            listOf(
+                "--enable-http",
+                "--enable-https",
+                "--enable-url-protocols=classpath",
+                "--initialize-at-build-time=com.hexagonkt.core.ClasspathHandler",
+                "-H:+StaticExecutableWithDynamicLibC",
+            )
+            .forEach(buildArgs::add)
+        }
+    }
 }
