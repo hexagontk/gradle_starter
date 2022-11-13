@@ -7,6 +7,10 @@ local_*
 .gradle/
 build/
 
+# Maven
+/target/
+*.versionsBackup
+
 # Eclipse
 bin/
 .settings/
