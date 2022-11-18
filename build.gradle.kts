@@ -31,6 +31,7 @@ extensions.configure<GraalVMExtension> {
                 "--enable-https",
                 "--enable-url-protocols=classpath",
                 "--initialize-at-build-time=com.hexagonkt.core.ClasspathHandler",
+                "--report-unsupported-elements-at-runtime",
                 "-H:+StaticExecutableWithDynamicLibC",
             )
             .forEach(buildArgs::add)
