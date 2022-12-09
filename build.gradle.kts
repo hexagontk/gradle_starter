@@ -32,7 +32,9 @@ extensions.configure<GraalVMExtension> {
                 "--enable-url-protocols=classpath",
                 "--initialize-at-build-time=com.hexagonkt.core.ClasspathHandler",
                 "--report-unsupported-elements-at-runtime",
+                "--enable-monitoring",
                 "-H:+StaticExecutableWithDynamicLibC",
+                "-R:MaxHeapSize=48m",
             )
             .forEach(buildArgs::add)
         }
