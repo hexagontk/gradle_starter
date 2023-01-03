@@ -1,9 +1,9 @@
 import org.graalvm.buildtools.gradle.dsl.GraalVMExtension
 
 plugins {
-    kotlin("jvm") version("1.7.21")
+    kotlin("jvm") version("1.8.0")
     id("org.jetbrains.dokka") version("1.7.20")
-    id("org.graalvm.buildtools.native") version("0.9.17")
+    id("org.graalvm.buildtools.native") version("0.9.19")
 }
 
 val gradleScripts = properties["gradleScripts"]
@@ -31,7 +31,6 @@ extensions.configure<GraalVMExtension> {
                 "--enable-https",
                 "--enable-url-protocols=classpath",
                 "--initialize-at-build-time=com.hexagonkt.core.ClasspathHandler",
-                "--report-unsupported-elements-at-runtime",
                 "--enable-monitoring",
                 "-H:+StaticExecutableWithDynamicLibC",
                 "-R:MaxHeapSize=48m",
