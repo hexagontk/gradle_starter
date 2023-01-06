@@ -1,4 +1,5 @@
 import org.graalvm.buildtools.gradle.dsl.GraalVMExtension
+import java.lang.System.getProperty
 
 plugins {
     kotlin("jvm") version("1.8.0")
@@ -26,14 +27,27 @@ dependencies {
 extensions.configure<GraalVMExtension> {
     binaries {
         named("main") {
-            listOf(
+            val https =
+                if (getProperty("enableHttps") == "true") "--enable-https"
+                else null
+            val monitoring =
+                if (getProperty("enableMonitoring") == "true") "--enable-monitoring"
+                else null
+            val mostlyStatic =
+                if (getProperty("mostlyStatic") == "true") "-H:+StaticExecutableWithDynamicLibC"
+                else null
+            val heap =
+                if (getProperty("heap") != null) "-R:MaxHeapSize=${getProperty("heap")}"
+                else null
+
+            listOfNotNull(
                 "--enable-http",
-                "--enable-https",
                 "--enable-url-protocols=classpath",
                 "--initialize-at-build-time=com.hexagonkt.core.ClasspathHandler",
-                "--enable-monitoring",
-                "-H:+StaticExecutableWithDynamicLibC",
-                "-R:MaxHeapSize=48m",
+                https,
+                monitoring,
+                mostlyStatic,
+                heap,
             )
             .forEach(buildArgs::add)
         }
