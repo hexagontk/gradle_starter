@@ -1,6 +1,6 @@
 package org.example
 
-import com.hexagonkt.core.media.TextMedia
+import com.hexagonkt.core.media.TEXT_PLAIN
 import com.hexagonkt.http.client.HttpClient
 import com.hexagonkt.http.client.jetty.JettyClientAdapter
 import org.junit.jupiter.api.AfterAll
@@ -34,7 +34,7 @@ internal class GradleStarterTest {
         val content = response.body
 
         assertNotNull(response.headers["server"])
-        assertEquals(TextMedia.PLAIN, response.contentType?.mediaType)
+        assertEquals(TEXT_PLAIN, response.contentType?.mediaType)
 
         assertEquals("Hello, World!", content)
     }

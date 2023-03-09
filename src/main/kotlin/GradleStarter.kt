@@ -1,15 +1,15 @@
 package org.example
 
-import com.hexagonkt.core.allInterfaces
 import com.hexagonkt.http.server.*
 import com.hexagonkt.http.server.netty.NettyServerAdapter
 import com.hexagonkt.core.logging.LoggingManager
-import com.hexagonkt.core.media.TextMedia.PLAIN
+import com.hexagonkt.core.media.TEXT_PLAIN
 import com.hexagonkt.http.model.ContentType
 import com.hexagonkt.http.model.Header
+import java.net.InetAddress
 
 internal val settings = HttpServerSettings(
-    bindAddress = allInterfaces,
+    bindAddress = InetAddress.getLoopbackAddress(),
     bindPort = 9090
 )
 
@@ -20,7 +20,7 @@ internal val server: HttpServer by lazy {
         }
 
         get("/text") {
-            ok("Hello, World!", contentType = ContentType(PLAIN))
+            ok("Hello, World!", contentType = ContentType(TEXT_PLAIN))
         }
     }
 }

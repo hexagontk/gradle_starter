@@ -2,9 +2,8 @@ import org.graalvm.buildtools.gradle.dsl.GraalVMExtension
 import java.lang.System.getProperty
 
 plugins {
-    kotlin("jvm") version("1.8.0")
-    id("org.jetbrains.dokka") version("1.7.20")
-    id("org.graalvm.buildtools.native") version("0.9.19")
+    kotlin("jvm") version("1.8.10")
+    id("org.graalvm.buildtools.native") version("0.9.20")
 }
 
 val gradleScripts = properties["gradleScripts"]
@@ -25,6 +24,7 @@ dependencies {
 }
 
 extensions.configure<GraalVMExtension> {
+
     binaries {
         named("main") {
             val https =
