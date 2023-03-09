@@ -4,11 +4,11 @@ This is a Hexagon service created from a template.
 
 ## Software Requirements
 To build the application you will need:
-* JDK 8+ for compiling the sources.
+* JDK 11+ for compiling the sources.
 * An Internet connection to download the dependencies.
 
 To run the application:
-* JRE 8+ (JDK is not required at runtime).
+* JRE 11+ (JDK is not required at runtime).
 
 ## Development
 * Build: `./gradlew build`
@@ -46,11 +46,9 @@ Once the application is running, you can send a request executing:
 
 ## Native Image
 ```bash
-./gradlew -Pagent test
-./gradlew upx
+./gradlew -P agent test
+./gradlew nativeCompile
 
 # Executable
 build/native/nativeCompile/gradle_starter
-# Compressed executable
-build/gradle_starter
 ```

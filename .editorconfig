@@ -38,18 +38,30 @@ ij_json_spaces_within_braces = true
 ij_json_spaces_within_brackets = true
 ij_json_wrap_long_lines = true
 
-[*.html]
-ij_html_do_not_indent_children_of_tags = none
+# IntelliJ YAML specific rules
+[*.{yaml,yml}]
+ij_yaml_spaces_within_brackets = true
+ij_yaml_spaces_within_braces = true
+ij_yaml_keep_line_breaks = true
+
+# IntelliJ HTML formatting
+[*.{html,htm}]
+ij_html_do_not_indent_children_of_tags = html
 
 # 4 space indentation
-[*.{java,js,kt,kts,gradle,groovy,py}]
+[*.{java,js,ts,kt,kts,gradle,groovy,py}]
 indent_size = 4
 ij_continuation_indent_size = 4
+
+# Go language uses tabs by default
+[*.go]
+indent_style = tab
 
 # IntelliJ Kotlin specific rules
 [*.{kt,kts}]
 ij_kotlin_code_style_defaults = KOTLIN_OFFICIAL
 ij_kotlin_import_nested_classes = true
 
+# Log files exception
 [*.log]
 max_line_length = 200

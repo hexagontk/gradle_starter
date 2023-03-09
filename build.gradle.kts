@@ -6,12 +6,20 @@ plugins {
     id("org.graalvm.buildtools.native") version("0.9.20")
 }
 
-val gradleScripts = properties["gradleScripts"]
-val hexagonVersion = properties["hexagonVersion"]
+val hexagonVersion = "2.6.3"
+val gradleScripts = "https://raw.githubusercontent.com/hexagonkt/hexagon/$hexagonVersion/gradle"
 
 apply(from = "$gradleScripts/kotlin.gradle")
 apply(from = "$gradleScripts/application.gradle")
 apply(from = "$gradleScripts/native.gradle")
+
+defaultTasks("build")
+
+version="1.0.0"
+group="org.example"
+description="Service's description"
+
+tasks.named("build") { dependsOn("jpackage") }
 
 extensions.configure<JavaApplication> {
     mainClass.set("org.example.GradleStarterKt")
@@ -24,7 +32,6 @@ dependencies {
 }
 
 extensions.configure<GraalVMExtension> {
-
     binaries {
         named("main") {
             val https =

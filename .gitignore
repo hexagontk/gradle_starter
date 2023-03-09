@@ -3,13 +3,17 @@
 private_*
 local_*
 
+# Maven
+target/
+pom.xml.*
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+*.versionsBackup
+
 # Gradle
 .gradle/
 build/
-
-# Maven
-/target/
-*.versionsBackup
 
 # Eclipse
 bin/
@@ -34,9 +38,11 @@ log/
 hs_err_pid*
 
 # Other Tools
+kotlin-js-store/
 node_modules/
-.java-version
 package-lock.json
+.env
+.sdkmanrc
 
 # System Files
 .DS_Store
