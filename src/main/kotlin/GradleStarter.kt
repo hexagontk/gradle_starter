@@ -1,15 +1,15 @@
 package org.example
 
+import com.hexagonkt.core.ALL_INTERFACES
 import com.hexagonkt.http.server.*
 import com.hexagonkt.http.server.netty.NettyServerAdapter
 import com.hexagonkt.core.logging.LoggingManager
 import com.hexagonkt.core.media.TEXT_PLAIN
 import com.hexagonkt.http.model.ContentType
 import com.hexagonkt.http.model.Header
-import java.net.InetAddress
 
 internal val settings = HttpServerSettings(
-    bindAddress = InetAddress.getLoopbackAddress(),
+    bindAddress = ALL_INTERFACES,
     bindPort = 9090
 )
 
