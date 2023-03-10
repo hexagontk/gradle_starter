@@ -19,8 +19,6 @@ version="1.0.0"
 group="org.example"
 description="Service's description"
 
-tasks.named("build") { dependsOn("jpackage") }
-
 extensions.configure<JavaApplication> {
     mainClass.set("org.example.GradleStarterKt")
 }

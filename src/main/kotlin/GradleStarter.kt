@@ -16,7 +16,7 @@ internal val settings = HttpServerSettings(
 internal val server: HttpServer by lazy {
     HttpServer(NettyServerAdapter(), settings) {
         on("*") {
-            send(headers = response.headers + Header("server", "Servlet/3.1"))
+            send(headers = response.headers + Header("server", "Hexagon/2.6"))
         }
 
         get("/text") {
