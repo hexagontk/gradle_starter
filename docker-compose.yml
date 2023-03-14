@@ -8,3 +8,11 @@ services:
     build: .
     ports:
       - "9999:9090"
+
+  gradle_starter_native:
+    image: gradle_starter_native:latest
+    build:
+      context: .
+      dockerfile: native.dockerfile
+    ports:
+      - "9900:9090"

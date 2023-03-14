@@ -1,5 +1,5 @@
 
-FROM ibm-semeru-runtimes:open-17-jre
+FROM busybox
 
 # Project setup
 ENV PROJECT gradle_starter
@@ -13,6 +13,6 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Project install
 USER 1000
-ADD --chown=1000:1000 build/distributions/$PROJECT*.tar /opt
-WORKDIR /opt/$PROJECT*
-ENTRYPOINT /opt/$PROJECT*/bin/$PROJECT
+ADD --chown=1000:1000 build/native/nativeCompile/$PROJECT /
+WORKDIR /
+ENTRYPOINT /$PROJECT

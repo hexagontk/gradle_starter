@@ -30,30 +30,20 @@ dependencies {
 }
 
 extensions.configure<GraalVMExtension> {
+    fun option(name: String, value: (String) -> String): String? =
+        getProperty(name)?.let(value).also { println(">>> $name : $it") }
+
     binaries {
         named("main") {
-            val https =
-                if (getProperty("enableHttps") == "true") "--enable-https"
-                else null
-            val monitoring =
-                if (getProperty("enableMonitoring") == "true") "--enable-monitoring"
-                else null
-            val mostlyStatic =
-                if (getProperty("mostlyStatic") == "true") "-H:+StaticExecutableWithDynamicLibC"
-                else null
-            val heap =
-                if (getProperty("heap") != null) "-R:MaxHeapSize=${getProperty("heap")}"
-                else null
-
             listOfNotNull(
-                "--enable-http",
                 "--enable-url-protocols=classpath",
                 "--initialize-at-run-time=com.hexagonkt.core.NetworkKt",
                 "--initialize-at-build-time=com.hexagonkt.core.ClasspathHandler",
-                https,
-                monitoring,
-                mostlyStatic,
-                heap,
+                option("static") { "--static" },
+                option("enableHttps") { "--enable-https" },
+                option("enableMonitoring") { "--enable-monitoring" },
+                option("mostlyStatic") { "-H:+StaticExecutableWithDynamicLibC" },
+                option("heap") { "-R:MaxHeapSize=$it" },
             )
             .forEach(buildArgs::add)
         }
