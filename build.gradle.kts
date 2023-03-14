@@ -31,7 +31,7 @@ dependencies {
 
 extensions.configure<GraalVMExtension> {
     fun option(name: String, value: (String) -> String): String? =
-        getProperty(name)?.let(value).also { println(">>> $name : $it") }
+        getProperty(name)?.let(value).also { println("$name : $it") }
 
     binaries {
         named("main") {
@@ -40,7 +40,6 @@ extensions.configure<GraalVMExtension> {
                 "--initialize-at-run-time=com.hexagonkt.core.NetworkKt",
                 "--initialize-at-build-time=com.hexagonkt.core.ClasspathHandler",
                 option("static") { "--static" },
-                option("enableHttps") { "--enable-https" },
                 option("enableMonitoring") { "--enable-monitoring" },
                 option("mostlyStatic") { "-H:+StaticExecutableWithDynamicLibC" },
                 option("heap") { "-R:MaxHeapSize=$it" },

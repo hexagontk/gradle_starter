@@ -5,14 +5,10 @@ services:
 
   gradle_starter:
     image: gradle_starter:latest
-    build: .
-    ports:
-      - "9999:9090"
+    build: { dockerfile: jre.dockerfile }
+    ports: [ "9999:9090" ]
 
   gradle_starter_native:
     image: gradle_starter_native:latest
-    build:
-      context: .
-      dockerfile: native.dockerfile
-    ports:
-      - "9900:9090"
+    build: { dockerfile: native.dockerfile }
+    ports: [ "9900:9090" ]
