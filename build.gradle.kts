@@ -6,7 +6,7 @@ plugins {
     id("org.graalvm.buildtools.native") version("0.9.20")
 }
 
-val hexagonVersion = "2.6.3"
+val hexagonVersion = "2.6.4"
 val gradleScripts = "https://raw.githubusercontent.com/hexagonkt/hexagon/$hexagonVersion/gradle"
 
 apply(from = "$gradleScripts/kotlin.gradle")
@@ -31,7 +31,7 @@ dependencies {
 
 extensions.configure<GraalVMExtension> {
     fun option(name: String, value: (String) -> String): String? =
-        getProperty(name)?.let(value).also { println("$name : $it") }
+        getProperty(name)?.let(value)
 
     binaries {
         named("main") {
@@ -39,12 +39,36 @@ extensions.configure<GraalVMExtension> {
                 "--enable-url-protocols=classpath",
                 "--initialize-at-run-time=com.hexagonkt.core.NetworkKt",
                 "--initialize-at-build-time=com.hexagonkt.core.ClasspathHandler",
-                option("static") { "--static" },
+                "--static", // Won't work on Windows or macOS
                 option("enableMonitoring") { "--enable-monitoring" },
-                option("mostlyStatic") { "-H:+StaticExecutableWithDynamicLibC" },
                 option("heap") { "-R:MaxHeapSize=$it" },
             )
             .forEach(buildArgs::add)
         }
     }
+}
+
+tasks.register("setUp") {
+    doLast {
+    }
+}
+
+tasks.register<Exec>("dockerCreate") {
+    dependsOn("build", "tarNative", "tarJpackage")
+    commandLine("docker-compose create --build --force-recreate".split(" "))
+}
+
+tasks.register<Exec>("dockerUp") {
+    dependsOn("dockerCreate")
+    commandLine("docker-compose up -d".split(" "))
+}
+
+tasks.register<Exec>("dockerImages") {
+    dependsOn("dockerCreate")
+    commandLine("docker-compose images".split(" "))
+}
+
+tasks.register<Exec>("dockerStats") {
+    dependsOn("dockerUp")
+    commandLine("docker stats --no-stream".split(" "))
 }

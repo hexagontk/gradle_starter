@@ -8,13 +8,14 @@ import com.hexagonkt.core.media.TEXT_PLAIN
 import com.hexagonkt.http.model.ContentType
 import com.hexagonkt.http.model.Header
 
-internal val settings = HttpServerSettings(
-    bindAddress = ALL_INTERFACES,
-    bindPort = 9090
-)
+internal val settings = HttpServerSettings(ALL_INTERFACES, 9090)
+internal val serverAdapter = NettyServerAdapter(executorThreads = 4)
 
-internal val server: HttpServer by lazy {
-    HttpServer(NettyServerAdapter(), settings) {
+internal lateinit var server: HttpServer
+
+internal fun main() {
+    LoggingManager.defaultLoggerName = "org.example"
+    server = serve(serverAdapter, settings) {
         on("*") {
             send(headers = response.headers + Header("server", "Hexagon/2.6"))
         }
@@ -23,9 +24,4 @@ internal val server: HttpServer by lazy {
             ok("Hello, World!", contentType = ContentType(TEXT_PLAIN))
         }
     }
-}
-
-internal fun main() {
-    LoggingManager.defaultLoggerName = "org.example"
-    server.start()
 }

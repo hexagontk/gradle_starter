@@ -51,4 +51,7 @@ Once the application is running, you can send a request executing:
 
 # Executable
 build/native/nativeCompile/gradle_starter
+
+# Memory
+ps -o rss -C gradle_starter
 ```
