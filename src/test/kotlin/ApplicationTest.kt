@@ -13,7 +13,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
 @TestInstance(PER_CLASS)
-internal class GradleStarterTest {
+internal class ApplicationTest {
 
     private val client by lazy {
         HttpClient(JettyClientAdapter(), URL("http://localhost:${server.runtimePort}"))

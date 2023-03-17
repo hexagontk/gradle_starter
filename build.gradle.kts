@@ -20,11 +20,12 @@ group="org.example"
 description="Service's description"
 
 extensions.configure<JavaApplication> {
-    mainClass.set("org.example.GradleStarterKt")
+    mainClass.set("org.example.ApplicationKt")
 }
 
 dependencies {
-    "implementation"("com.hexagonkt:http_server_netty:$hexagonVersion")
+    "implementation"("com.hexagonkt:http_server_jetty:$hexagonVersion")
+    "implementation"("org.slf4j:slf4j-nop:2.0.6")
 
     "testImplementation"("com.hexagonkt:http_client_jetty:$hexagonVersion")
 }
@@ -48,27 +49,8 @@ extensions.configure<GraalVMExtension> {
     }
 }
 
-tasks.register("setUp") {
-    doLast {
-    }
-}
-
-tasks.register<Exec>("dockerCreate") {
+tasks.register<Exec>("dockerBuild") {
     dependsOn("build", "tarNative", "tarJpackage")
-    commandLine("docker-compose create --build --force-recreate".split(" "))
-}
-
-tasks.register<Exec>("dockerUp") {
-    dependsOn("dockerCreate")
-    commandLine("docker-compose up -d".split(" "))
-}
-
-tasks.register<Exec>("dockerImages") {
-    dependsOn("dockerCreate")
-    commandLine("docker-compose images".split(" "))
-}
-
-tasks.register<Exec>("dockerStats") {
-    dependsOn("dockerUp")
-    commandLine("docker stats --no-stream".split(" "))
+    file("build/jpackage").deleteRecursively()
+    commandLine("docker-compose build --build-arg PROJECT=${project.name}".split(" "))
 }

@@ -3,12 +3,10 @@ version: '3.9'
 
 services:
 
-  gradle_starter:
-    image: gradle_starter:latest
+  gradle_starter_gradle:
+    image: gradle_starter_gradle:latest
     build:
       dockerfile: gradle.dockerfile
-      args:
-        PROJECT: gradle_starter
     ports:
       - "9910:9090"
 
@@ -16,8 +14,6 @@ services:
     image: gradle_starter_native:latest
     build:
       dockerfile: native.dockerfile
-      args:
-        PROJECT: gradle_starter
     ports:
       - "9920:9090"
 
@@ -25,7 +21,5 @@ services:
     image: gradle_starter_jpackage:latest
     build:
       dockerfile: jpackage.dockerfile
-      args:
-        PROJECT: gradle_starter
     ports:
       - "9930:9090"
