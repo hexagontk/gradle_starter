@@ -19,12 +19,12 @@ internal class ApplicationTest {
         HttpClient(JettyClientAdapter(), URL("http://localhost:${server.runtimePort}"))
     }
 
-    @BeforeAll fun beforeSpec() {
+    @BeforeAll fun beforeAll() {
         main()
         client.start()
     }
 
-    @AfterAll fun afterSpec() {
+    @AfterAll fun afterAll() {
         client.stop()
         server.stop()
     }
