@@ -6,7 +6,7 @@ plugins {
     id("org.graalvm.buildtools.native") version("0.9.20")
 }
 
-val hexagonVersion = "2.6.4"
+val hexagonVersion = "2.6.5"
 val gradleScripts = "https://raw.githubusercontent.com/hexagonkt/hexagon/$hexagonVersion/gradle"
 
 apply(from = "$gradleScripts/kotlin.gradle")
@@ -41,8 +41,8 @@ extensions.configure<GraalVMExtension> {
                 "--initialize-at-run-time=com.hexagonkt.core.NetworkKt",
                 "--initialize-at-build-time=com.hexagonkt.core.ClasspathHandler",
                 "--static", // Won't work on Windows or macOS
+                "-R:MaxHeapSize=12",
                 option("enableMonitoring") { "--enable-monitoring" },
-                option("heap") { "-R:MaxHeapSize=$it" },
             )
             .forEach(buildArgs::add)
         }
@@ -51,6 +51,5 @@ extensions.configure<GraalVMExtension> {
 
 tasks.register<Exec>("dockerBuild") {
     dependsOn("build", "tarNative", "tarJpackage")
-    file("build/jpackage").deleteRecursively()
     commandLine("docker-compose build --build-arg PROJECT=${project.name}".split(" "))
 }
