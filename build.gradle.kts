@@ -6,6 +6,7 @@ plugins {
     id("org.graalvm.buildtools.native") version("0.9.20")
 }
 
+val options = "-Xmx48m"
 val hexagonVersion = "2.6.5"
 val gradleScripts = "https://raw.githubusercontent.com/hexagonkt/hexagon/$hexagonVersion/gradle"
 
@@ -19,8 +20,12 @@ version="1.0.0"
 group="org.example"
 description="Service's description"
 
+ext.set("options", options)
+tasks.named("build") { dependsOn("installDist", "tarJpackage") }
+
 extensions.configure<JavaApplication> {
     mainClass.set("org.example.ApplicationKt")
+    applicationDefaultJvmArgs = options.split(" ")
 }
 
 dependencies {
@@ -41,15 +46,10 @@ extensions.configure<GraalVMExtension> {
                 "--initialize-at-run-time=com.hexagonkt.core.NetworkKt",
                 "--initialize-at-build-time=com.hexagonkt.core.ClasspathHandler",
                 "--static", // Won't work on Windows or macOS
-                "-R:MaxHeapSize=12",
+                "-R:MaxHeapSize=16",
                 option("enableMonitoring") { "--enable-monitoring" },
             )
             .forEach(buildArgs::add)
         }
     }
-}
-
-tasks.register<Exec>("dockerBuild") {
-    dependsOn("build", "tarNative", "tarJpackage")
-    commandLine("docker-compose build --build-arg PROJECT=${project.name}".split(" "))
 }

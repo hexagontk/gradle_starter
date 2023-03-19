@@ -7,7 +7,6 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-
     steps:
       - name: Check Out
         uses: actions/checkout@v3
@@ -17,6 +16,5 @@ jobs:
           java-version: 17
           distribution: temurin
           cache: gradle
-
       - name: Build Project
         run: ./gradlew
