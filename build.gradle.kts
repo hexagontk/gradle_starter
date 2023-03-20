@@ -7,7 +7,7 @@ plugins {
 }
 
 val options = "-Xmx48m"
-val hexagonVersion = "2.6.5"
+val hexagonVersion = "2.6.6"
 val gradleScripts = "https://raw.githubusercontent.com/hexagonkt/hexagon/$hexagonVersion/gradle"
 
 apply(from = "$gradleScripts/kotlin.gradle")
