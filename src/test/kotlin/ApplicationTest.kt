@@ -2,6 +2,7 @@ package org.example
 
 import com.hexagonkt.core.media.TEXT_PLAIN
 import com.hexagonkt.http.client.HttpClient
+import com.hexagonkt.http.client.HttpClientSettings
 import com.hexagonkt.http.client.jetty.JettyClientAdapter
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
@@ -16,7 +17,8 @@ import kotlin.test.assertNotNull
 internal class ApplicationTest {
 
     private val client by lazy {
-        HttpClient(JettyClientAdapter(), URL("http://localhost:${server.runtimePort}"))
+        val clientSettings = HttpClientSettings(URL("http://localhost:${server.runtimePort}"))
+        HttpClient(JettyClientAdapter(), clientSettings)
     }
 
     @BeforeAll fun beforeAll() {
