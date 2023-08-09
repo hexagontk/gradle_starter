@@ -14,7 +14,8 @@ jobs:
         uses: graalvm/setup-graalvm@v1
         with:
           version: latest
-          java-version: "17"
+          distribution: graalvm-community
+          java-version: 20
           cache: gradle
       - name: Build Project
         run: ./gradlew nativeTest
