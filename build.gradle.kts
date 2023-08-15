@@ -6,7 +6,7 @@ plugins {
     id("org.graalvm.buildtools.native") version("0.9.24")
 }
 
-val hexagonVersion = "3.0.0-B9"
+val hexagonVersion = "3.0.0"
 val gradleScripts = "https://raw.githubusercontent.com/hexagonkt/hexagon/$hexagonVersion/gradle"
 
 ext.set("options", "-Xmx48m")
@@ -23,7 +23,7 @@ group="org.example"
 description="Service's description"
 
 dependencies {
-    "implementation"("com.hexagonkt:http_server_jetty:$hexagonVersion")
+    "implementation"("com.hexagonkt:http_server_netty:$hexagonVersion")
     "implementation"("org.slf4j:slf4j-nop:2.0.7")
 
     "testImplementation"("com.hexagonkt:http_client_jetty:$hexagonVersion")
@@ -36,6 +36,7 @@ extensions.configure<GraalVMExtension> {
     binaries {
         named("main") {
             listOfNotNull(
+                option("static") { "--static" },
                 option("enableMonitoring") { "--enable-monitoring" },
             )
             .forEach(buildArgs::add)

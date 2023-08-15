@@ -1,6 +1,7 @@
 package org.example
 
 import com.hexagonkt.core.media.TEXT_PLAIN
+import com.hexagonkt.core.urlOf
 import com.hexagonkt.http.client.HttpClient
 import com.hexagonkt.http.client.HttpClientSettings
 import com.hexagonkt.http.client.jetty.JettyClientAdapter
@@ -9,7 +10,6 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
-import java.net.URL
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
@@ -17,7 +17,7 @@ import kotlin.test.assertNotNull
 internal class ApplicationTest {
 
     private val client by lazy {
-        val clientSettings = HttpClientSettings(URL("http://localhost:${server.runtimePort}"))
+        val clientSettings = HttpClientSettings(urlOf("http://localhost:${server.runtimePort}"))
         HttpClient(JettyClientAdapter(), clientSettings)
     }
 
