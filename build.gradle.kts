@@ -38,6 +38,13 @@ extensions.configure<GraalVMExtension> {
             listOfNotNull(
                 option("static") { "--static" },
                 option("enableMonitoring") { "--enable-monitoring" },
+                option("pgo") { "--pgo" },
+            )
+            .forEach(buildArgs::add)
+        }
+        named("test") {
+            listOfNotNull(
+                option("pgo") { "--pgo-instrument" },
             )
             .forEach(buildArgs::add)
         }
