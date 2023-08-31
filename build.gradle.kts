@@ -2,11 +2,11 @@ import org.graalvm.buildtools.gradle.dsl.GraalVMExtension
 import java.lang.System.getProperty
 
 plugins {
-    kotlin("jvm") version("1.9.0")
-    id("org.graalvm.buildtools.native") version("0.9.24")
+    kotlin("jvm") version("1.9.10")
+    id("org.graalvm.buildtools.native") version("0.9.25")
 }
 
-val hexagonVersion = "3.0.1"
+val hexagonVersion = "3.0.3"
 val gradleScripts = "https://raw.githubusercontent.com/hexagonkt/hexagon/$hexagonVersion/gradle"
 
 ext.set("options", "-Xmx48m")
