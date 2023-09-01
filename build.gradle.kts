@@ -6,7 +6,7 @@ plugins {
     id("org.graalvm.buildtools.native") version("0.9.25")
 }
 
-val hexagonVersion = "3.0.3"
+val hexagonVersion = "3.0.4"
 val gradleScripts = "https://raw.githubusercontent.com/hexagonkt/hexagon/$hexagonVersion/gradle"
 
 ext.set("options", "-Xmx48m")
