@@ -3,10 +3,10 @@ import java.lang.System.getProperty
 
 plugins {
     kotlin("jvm") version("1.9.10")
-    id("org.graalvm.buildtools.native") version("0.9.25")
+    id("org.graalvm.buildtools.native") version("0.9.27")
 }
 
-val hexagonVersion = "3.0.4"
+val hexagonVersion = "3.2.0"
 val gradleScripts = "https://raw.githubusercontent.com/hexagonkt/hexagon/$hexagonVersion/gradle"
 
 ext.set("options", "-Xmx48m")
@@ -26,7 +26,7 @@ dependencies {
     "implementation"("com.hexagonkt:http_server_netty:$hexagonVersion")
 
     "testImplementation"("com.hexagonkt:http_client_jetty:$hexagonVersion")
-    "testImplementation"("org.slf4j:slf4j-nop:2.0.7")
+    "testImplementation"("org.slf4j:slf4j-nop:2.0.9")
 }
 
 extensions.configure<GraalVMExtension> {
@@ -38,13 +38,14 @@ extensions.configure<GraalVMExtension> {
             listOfNotNull(
                 option("static") { "--static" },
                 option("enableMonitoring") { "--enable-monitoring" },
+                option("pgoInstrument") { "--pgo-instrument" },
                 option("pgo") { "--pgo" },
             )
             .forEach(buildArgs::add)
         }
         named("test") {
             listOfNotNull(
-                option("pgo") { "--pgo-instrument" },
+                option("pgoInstrument") { "--pgo-instrument" },
             )
             .forEach(buildArgs::add)
         }
