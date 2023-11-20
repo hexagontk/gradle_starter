@@ -53,3 +53,10 @@ build/native/nativeCompile/gradle_starter
 # Memory
 ps -o rss -C gradle_starter
 ```
+
+```bash
+./gradlew -D pgoInstrument nativeCompile
+build/native/nativeCompile/gradle_starter
+http :9090/text
+./gradlew -D pgo nativeCompile
+```
