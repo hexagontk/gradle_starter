@@ -15,7 +15,7 @@ jobs:
         with:
           version: latest
           distribution: graalvm
-          java-version: 20
+          java-version: 21
           cache: gradle
       - name: Build Project
         run: ./gradlew nativeTest
