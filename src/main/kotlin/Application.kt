@@ -3,7 +3,6 @@ package org.example
 import com.hexagonkt.core.ALL_INTERFACES
 import com.hexagonkt.http.server.*
 import com.hexagonkt.http.server.netty.NettyServerAdapter
-import com.hexagonkt.core.logging.LoggingManager
 import com.hexagonkt.core.media.TEXT_PLAIN
 import com.hexagonkt.http.model.ContentType
 import com.hexagonkt.http.model.Header
@@ -14,7 +13,6 @@ internal val serverAdapter = NettyServerAdapter(executorThreads = 4)
 internal lateinit var server: HttpServer
 
 internal fun main() {
-    LoggingManager.defaultLoggerName = "org.example"
     server = serve(serverAdapter, settings) {
         before("*") {
             send(headers = response.headers + Header("server", "Hexagon/2.6"))

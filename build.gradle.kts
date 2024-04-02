@@ -3,12 +3,12 @@ import java.lang.System.getProperty
 import org.gradle.api.tasks.wrapper.Wrapper.DistributionType.ALL
 
 plugins {
-    kotlin("jvm") version("1.9.22")
-    id("org.graalvm.buildtools.native") version("0.9.28")
+    kotlin("jvm") version("1.9.23")
+    id("org.graalvm.buildtools.native") version("0.10.1")
 }
 
-val hexagonVersion = "3.4.6"
-val gradleScripts = "https://raw.githubusercontent.com/hexagonkt/hexagon/$hexagonVersion/gradle"
+val hexagonVersion = "3.5.3"
+val gradleScripts = "https://raw.githubusercontent.com/hexagontk/hexagon/$hexagonVersion/gradle"
 
 ext.set("options", "-Xmx48m")
 ext.set("applicationClass", "org.example.ApplicationKt")
@@ -31,7 +31,7 @@ dependencies {
 }
 
 tasks.wrapper {
-    gradleVersion = "8.5"
+    gradleVersion = "8.7"
     distributionType = ALL
 }
 
