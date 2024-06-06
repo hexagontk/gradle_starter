@@ -3,8 +3,8 @@ import java.lang.System.getProperty
 import org.gradle.api.tasks.wrapper.Wrapper.DistributionType.ALL
 
 plugins {
-    kotlin("jvm") version("1.9.23")
-    id("org.graalvm.buildtools.native") version("0.10.1")
+    kotlin("jvm") version("2.0.0")
+    id("org.graalvm.buildtools.native") version("0.10.2")
 }
 
 val hexagonVersion = "3.5.3"
@@ -27,11 +27,11 @@ dependencies {
     "implementation"("com.hexagonkt:http_server_netty:$hexagonVersion")
 
     "testImplementation"("com.hexagonkt:http_client_jetty:$hexagonVersion")
-    "testImplementation"("org.slf4j:slf4j-nop:2.0.9")
+    "testImplementation"("org.slf4j:slf4j-nop:2.0.13")
 }
 
 tasks.wrapper {
-    gradleVersion = "8.7"
+    gradleVersion = "8.8"
     distributionType = ALL
 }
 
