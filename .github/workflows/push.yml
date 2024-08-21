@@ -1,6 +1,5 @@
 
 name: Push
-
 on: push
 
 jobs:

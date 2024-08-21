@@ -3,14 +3,14 @@ import java.lang.System.getProperty
 import org.gradle.api.tasks.wrapper.Wrapper.DistributionType.ALL
 
 plugins {
-    kotlin("jvm") version("2.0.0")
+    kotlin("jvm") version("2.0.10")
     id("org.graalvm.buildtools.native") version("0.10.2")
 }
 
-val hexagonVersion = "3.6.0"
+val hexagonVersion = "3.6.4"
 val gradleScripts = "https://raw.githubusercontent.com/hexagontk/hexagon/$hexagonVersion/gradle"
 
-ext.set("modules", "java.base")
+ext.set("modules", "java.logging,java.management")
 ext.set("options", "-Xmx48m")
 ext.set("applicationClass", "org.example.ApplicationKt")
 
@@ -28,11 +28,11 @@ dependencies {
     "implementation"("com.hexagonkt:http_server_helidon:$hexagonVersion")
 
     "testImplementation"("com.hexagonkt:http_client_jetty:$hexagonVersion")
-    "testImplementation"("org.slf4j:slf4j-nop:2.0.13")
+    "testImplementation"("org.slf4j:slf4j-nop:2.0.16")
 }
 
 tasks.wrapper {
-    gradleVersion = "8.8"
+    gradleVersion = "8.10"
     distributionType = ALL
 }
 
