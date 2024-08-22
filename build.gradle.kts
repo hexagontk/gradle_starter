@@ -3,11 +3,11 @@ import java.lang.System.getProperty
 import org.gradle.api.tasks.wrapper.Wrapper.DistributionType.ALL
 
 plugins {
-    kotlin("jvm") version("2.0.10")
+    kotlin("jvm") version("2.0.20")
     id("org.graalvm.buildtools.native") version("0.10.2")
 }
 
-val hexagonVersion = "3.6.4"
+val hexagonVersion = "3.6.5"
 val gradleScripts = "https://raw.githubusercontent.com/hexagontk/hexagon/$hexagonVersion/gradle"
 
 ext.set("modules", "java.logging,java.management")
