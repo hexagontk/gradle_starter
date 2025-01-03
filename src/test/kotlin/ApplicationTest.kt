@@ -1,15 +1,15 @@
 package org.example
 
-import com.hexagonkt.core.media.TEXT_PLAIN
-import com.hexagonkt.core.urlOf
-import com.hexagonkt.http.client.HttpClient
-import com.hexagonkt.http.client.HttpClientSettings
-import com.hexagonkt.http.client.jetty.JettyClientAdapter
+import com.hexagontk.core.media.TEXT_PLAIN
+import com.hexagontk.http.client.HttpClient
+import com.hexagontk.http.client.HttpClientSettings
+import com.hexagontk.http.client.jetty.JettyHttpClient
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
+import java.net.URI
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
@@ -17,8 +17,8 @@ import kotlin.test.assertNotNull
 internal class ApplicationTest {
 
     private val client by lazy {
-        val clientSettings = HttpClientSettings(urlOf("http://localhost:${server.runtimePort}"))
-        HttpClient(JettyClientAdapter(), clientSettings)
+        val clientSettings = HttpClientSettings(URI("http://localhost:${server.runtimePort}"))
+        HttpClient(JettyHttpClient(), clientSettings)
     }
 
     @BeforeAll fun beforeAll() {
