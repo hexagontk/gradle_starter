@@ -24,6 +24,6 @@ internal fun main() {
     }
 
     System.setProperty(HEXAGONTK_LOGGING_COLOR, "true")
-    val banner = server.createShortBanner(Platform.uptime)
+    val banner = server.createBanner(Platform.uptime())
     logger.info { banner }
 }
