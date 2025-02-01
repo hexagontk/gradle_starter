@@ -2,13 +2,13 @@ package org.example
 
 import com.hexagontk.core.*
 import com.hexagontk.http.server.*
-import com.hexagontk.http.server.helidon.HelidonHttpServer
+import com.hexagontk.http.server.jdk.JdkHttpServer
 import com.hexagontk.core.media.TEXT_PLAIN
 import com.hexagontk.http.model.ContentType
 import com.hexagontk.http.model.Field
 
 internal val settings = HttpServerSettings(ALL_INTERFACES, 9090)
-internal val serverAdapter = HelidonHttpServer()
+internal val serverAdapter = JdkHttpServer()
 
 internal lateinit var server: HttpServer
 

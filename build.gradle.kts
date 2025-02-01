@@ -7,7 +7,7 @@ plugins {
     id("org.graalvm.buildtools.native") version("0.10.4")
 }
 
-val hexagonVersion = "4.0.0-B1"
+val hexagonVersion = "4.0.0-B2"
 val gradleScripts = "../hexagon/gradle"
 
 ext.set("modules", "java.logging,java.management")
@@ -25,7 +25,7 @@ group="org.example"
 description="Service's description"
 
 dependencies {
-    "implementation"("com.hexagontk.http:http_server_helidon:$hexagonVersion")
+    "implementation"("com.hexagontk.http:http_server_jdk:$hexagonVersion")
 
     "testImplementation"("com.hexagontk.http:http_client_jetty:$hexagonVersion")
     "testImplementation"("org.slf4j:slf4j-nop:2.0.16")
