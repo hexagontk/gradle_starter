@@ -3,7 +3,7 @@ package org.example
 import com.hexagontk.core.media.TEXT_PLAIN
 import com.hexagontk.http.client.HttpClient
 import com.hexagontk.http.client.HttpClientSettings
-import com.hexagontk.http.client.jetty.JettyHttpClient
+import com.hexagontk.http.client.jdk.JdkHttpClient
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -18,7 +18,7 @@ internal class ApplicationTest {
 
     private val client by lazy {
         val clientSettings = HttpClientSettings(URI("http://localhost:${server.runtimePort}"))
-        HttpClient(JettyHttpClient(), clientSettings)
+        HttpClient(JdkHttpClient(), clientSettings)
     }
 
     @BeforeAll fun beforeAll() {

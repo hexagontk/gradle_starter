@@ -4,13 +4,13 @@ import org.gradle.api.tasks.wrapper.Wrapper.DistributionType.ALL
 
 plugins {
     kotlin("jvm") version("2.1.10")
-    id("org.graalvm.buildtools.native") version("0.10.4")
+    id("org.graalvm.buildtools.native") version("0.10.5")
 }
 
-val hexagonVersion = "4.0.0-B2"
-val gradleScripts = "../hexagon/gradle"
+val hexagonVersion = "4.0.0-B3"
+val gradleScripts = "https://raw.githubusercontent.com/hexagontk/hexagon/$hexagonVersion/gradle"
 
-ext.set("modules", "java.logging,java.management")
+ext.set("modules", "java.logging")
 ext.set("options", "-Xmx48m")
 ext.set("applicationClass", "org.example.ApplicationKt")
 
@@ -27,8 +27,7 @@ description="Service's description"
 dependencies {
     "implementation"("com.hexagontk.http:http_server_jdk:$hexagonVersion")
 
-    "testImplementation"("com.hexagontk.http:http_client_jetty:$hexagonVersion")
-    "testImplementation"("org.slf4j:slf4j-nop:2.0.16")
+    "testImplementation"("com.hexagontk.http:http_client_jdk:$hexagonVersion")
 }
 
 tasks.wrapper {
