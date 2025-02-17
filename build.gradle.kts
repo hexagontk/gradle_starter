@@ -7,10 +7,10 @@ plugins {
     id("org.graalvm.buildtools.native") version("0.10.5")
 }
 
-val hexagonVersion = "4.0.1"
-val gradleScripts = "https://raw.githubusercontent.com/hexagontk/hexagon/$hexagonVersion/gradle"
+val hexagonVersion = "3.7.4"
+val gradleScripts = "https://raw.githubusercontent.com/hexagonkt/hexagon/$hexagonVersion/gradle"
 
-ext.set("modules", "jdk.httpserver")
+ext.set("modules", "java.logging")
 ext.set("options", "-Xmx48m")
 ext.set("applicationClass", "org.example.ApplicationKt")
 
@@ -25,9 +25,9 @@ group="org.example"
 description="Service's description"
 
 dependencies {
-    "implementation"("com.hexagontk.http:http_server_jdk:$hexagonVersion")
+    "implementation"("com.hexagonkt:http_server_jetty:$hexagonVersion")
 
-    "testImplementation"("com.hexagontk.http:http_client_jdk:$hexagonVersion")
+    "testImplementation"("com.hexagonkt:http_client_jetty:$hexagonVersion")
 }
 
 tasks.wrapper {
