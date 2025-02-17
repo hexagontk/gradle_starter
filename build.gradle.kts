@@ -7,10 +7,10 @@ plugins {
     id("org.graalvm.buildtools.native") version("0.10.5")
 }
 
-val hexagonVersion = "4.0.0-B3"
+val hexagonVersion = "4.0.1"
 val gradleScripts = "https://raw.githubusercontent.com/hexagontk/hexagon/$hexagonVersion/gradle"
 
-ext.set("modules", "java.logging")
+ext.set("modules", "jdk.httpserver")
 ext.set("options", "-Xmx48m")
 ext.set("applicationClass", "org.example.ApplicationKt")
 
@@ -41,8 +41,10 @@ extensions.configure<GraalVMExtension> {
 
     binaries {
         named("main") {
+            // ./gradlew -D=<option> nativeCompile
             listOfNotNull(
                 option("static") { "--static" },
+                option("mostlyStatic") { "-H:+StaticExecutableWithDynamicLibC" },
                 option("enableMonitoring") { "--enable-monitoring" },
                 option("pgoInstrument") { "--pgo-instrument" },
                 option("pgo") { "--pgo=../../../default.iprof" },
